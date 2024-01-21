@@ -1,0 +1,57 @@
+﻿@model IEnumerable<PostsDetailsViewModel>
+@{
+    ViewData["Title"] = "Index";
+}
+
+<!-- Begin Page Content -->
+<div class="container-fluid">
+
+    <!-- Page Heading -->
+    <h1 class="h3 mb-4 text-gray-800">Index</h1>
+
+    <a class="btn btn-primary mb-3" asp-action="Create" asp-controller="Posts">Create a Post</a>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Id</th>
+                <th scope="col">Image</th>
+                <th scope="col">Title</th>
+                <th scope="col">Description</th>
+                <th scope="col" colspan="2">Handle</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model != null)
+            {
+                foreach (var item in Model)
+                {
+                    <tr>
+                        <td scope="row">@item.Id</td>
+                        <td>
+                            <img style="width: 300px;" src="/imgs/@item.ImageUrl">
+                        </td>
+                        <td>@item.Title</td>
+                        <td>@item.Description</td>
+                        <td>
+                            <a class="btn btn-primary" asp-action="Edit" asp-controller="Posts" asp-route-id="@item.Id">Edit</a>
+                        </td>
+                        <td>
+                            <a class="btn btn-danger" asp-action="Delete" asp-controller="Posts" asp-route-id="@item.Id">Remove</a>
+                        </td>
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr>
+                    <td colspan="6">No data</td>
+                </tr>
+            }
+            
+            
+        </tbody>
+    </table>
+
+</div>
+<!-- /.container-fluid -->
